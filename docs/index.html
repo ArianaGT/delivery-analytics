@@ -6,13 +6,14 @@
   <title>Panel de análisis: restaurantes, precios y servicio</title>
   <style>
     :root {
-      --bg-main: #ffffff;
-      --bg-sidebar: #f8f9fb;
-      --border-color: #e6eaf1;
-      --text-primary: #31333f;
-      --text-secondary: #6e717c;
+      --bg-page: #f4f6f9;
+      --bg-card: #ffffff;
+      --bg-sidebar: #ffffff;
+      --border-color: #e2e8f0;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
       --accent-red: #ff4b4b;
-      --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      --card-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
     }
 
     * {
@@ -24,14 +25,14 @@
     body {
       font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: var(--text-primary);
-      background-color: var(--bg-main);
+      background-color: var(--bg-page);
       display: flex;
       min-height: 100vh;
     }
 
     /* Barra lateral (Sidebar) */
     .sidebar {
-      width: 280px;
+      width: 270px;
       background-color: var(--bg-sidebar);
       border-right: 1px solid var(--border-color);
       padding: 28px 20px;
@@ -58,7 +59,7 @@
 
     .badge-db {
       display: inline-block;
-      background: #eef2f6;
+      background: #f1f5f9;
       color: #475569;
       padding: 2px 6px;
       border-radius: 4px;
@@ -69,40 +70,41 @@
     .divider {
       height: 1px;
       background-color: var(--border-color);
-      margin: 4px 0;
     }
 
     .glossary-title {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 700;
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     details.glossary-item {
-      background: #ffffff;
+      background: #f8fafc;
       border: 1px solid var(--border-color);
       border-radius: 8px;
       margin-bottom: 10px;
       overflow: hidden;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
 
     details.glossary-item:hover {
       border-color: #cbd5e1;
+      background: #ffffff;
     }
 
     details.glossary-item summary {
-      padding: 11px 14px;
-      font-size: 0.88rem;
-      font-weight: 500;
+      padding: 10px 12px;
+      font-size: 0.86rem;
+      font-weight: 600;
       cursor: pointer;
       list-style: none;
       display: flex;
       align-items: center;
       gap: 8px;
+      color: var(--text-primary);
     }
 
     details.glossary-item summary::-webkit-details-marker {
@@ -111,7 +113,7 @@
 
     details.glossary-item summary::before {
       content: "›";
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       line-height: 1;
       color: var(--text-secondary);
       transition: transform 0.2s;
@@ -122,36 +124,37 @@
     }
 
     .glossary-content {
-      padding: 0 14px 12px 14px;
-      font-size: 0.83rem;
+      padding: 8px 12px 12px 12px;
+      font-size: 0.82rem;
       color: var(--text-secondary);
       line-height: 1.45;
-      border-top: 1px solid #f1f5f9;
-      padding-top: 10px;
+      border-top: 1px solid #e2e8f0;
+      background: #ffffff;
     }
 
     /* Contenido Principal */
     .main-content {
       flex: 1;
-      padding: 36px 48px;
-      max-width: 1200px;
-      overflow-x: hidden;
+      padding: 32px 44px;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .main-header h1 {
-      font-size: 2.1rem;
+      font-size: 1.95rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-bottom: 6px;
     }
 
     .main-header p {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-secondary);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     /* Pestañas estilo Streamlit */
@@ -168,7 +171,7 @@
       border: none;
       border-bottom: 2px solid transparent;
       padding: 10px 4px;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       font-weight: 500;
       color: var(--text-secondary);
       cursor: pointer;
@@ -194,11 +197,11 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
     .kpi-card {
-      background: #ffffff;
+      background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 16px 20px;
@@ -206,14 +209,14 @@
     }
 
     .kpi-label {
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       color: var(--text-secondary);
       margin-bottom: 6px;
     }
 
     .kpi-value {
-      font-size: 1.85rem;
-      font-weight: 600;
+      font-size: 1.8rem;
+      font-weight: 700;
       color: var(--text-primary);
       display: flex;
       align-items: center;
@@ -236,59 +239,43 @@
     }
 
     .report-card {
-      background: #ffffff;
+      background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 22px 24px;
-      margin-bottom: 28px;
+      padding: 16px 20px 20px 20px;
+      margin-bottom: 24px;
       box-shadow: var(--card-shadow);
     }
 
-    .report-header {
+    .report-topbar {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
     }
 
     .report-tag {
       font-size: 0.78rem;
+      font-weight: 600;
       color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 4px;
-    }
-
-    .report-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .report-desc {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin-top: 4px;
+      letter-spacing: 0.03em;
     }
 
     .btn-fullscreen {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 13px;
-      font-size: 0.83rem;
+      gap: 5px;
+      padding: 5px 11px;
+      font-size: 0.8rem;
       font-weight: 500;
-      color: var(--text-primary);
-      background: var(--bg-sidebar);
+      color: var(--text-secondary);
+      background: #f8fafc;
       border: 1px solid var(--border-color);
       border-radius: 6px;
       text-decoration: none;
       transition: all 0.2s;
-      white-space: nowrap;
     }
 
     .btn-fullscreen:hover {
@@ -299,24 +286,22 @@
 
     .iframe-wrapper {
       width: 100%;
-      height: 540px;
-      border: 1px solid #f1f5f9;
-      border-radius: 8px;
       overflow: hidden;
-      background: #fafafa;
     }
 
     .iframe-wrapper iframe {
       width: 100%;
-      height: 100%;
+      min-height: 620px;
       border: none;
+      display: block;
+      overflow: hidden;
     }
 
-    /* Responsivo para pantallas pequeñas */
+    /* Responsivo */
     @media (max-width: 960px) {
       body { flex-direction: column; }
       .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); }
-      .main-content { padding: 24px 20px; }
+      .main-content { padding: 20px 16px; }
       .kpi-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
@@ -403,58 +388,42 @@
     <!-- SECCIÓN 1: Restaurantes y ubicación -->
     <div id="tab-ubicacion" class="tab-panel active">
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Q4 · Premiación anual de aliados estratégicos</div>
-            <div class="report-title">🏅 Los 3 restaurantes con más reseñas</div>
-            <div class="report-desc">Premiación de aliados estratégicos · la altura es el número de reseñas · el círculo muestra la calificación promedio</div>
-          </div>
-          <a href="Reporte1_1_podio_resenas.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Q4 · Premiación anual de aliados estratégicos</span>
+          <a href="Reporte1_1_podio_resenas.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe src="Reporte1_1_podio_resenas.html" loading="lazy"></iframe>
+          <iframe src="Reporte1_1_podio_resenas.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
 
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 1.2 · Evolución geográfica</div>
-            <div class="report-title">📈 Ranking mensual por país</div>
-            <div class="report-desc">Desempeño y posicionamiento mensual de los restaurantes por país</div>
-          </div>
-          <a href="Reporte1_2_ranking_mensual_pais.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 1.2 · Evolución geográfica</span>
+          <a href="Reporte1_2_ranking_mensual_pais.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe src="Reporte1_2_ranking_mensual_pais.html" loading="lazy"></iframe>
+          <iframe src="Reporte1_2_ranking_mensual_pais.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
 
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 1.3 · Variación urbana</div>
-            <div class="report-title">🏙️ Encarecimiento por ciudad</div>
-            <div class="report-desc">Comparativa del incremento de precios promedio en las 10 ciudades evaluadas</div>
-          </div>
-          <a href="Reporte1_3_ciudades_por_pais.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 1.3 · Variación urbana</span>
+          <a href="Reporte1_3_ciudades_por_pais.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe src="Reporte1_3_ciudades_por_pais.html" loading="lazy"></iframe>
+          <iframe src="Reporte1_3_ciudades_por_pais.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
 
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 1.4 · Detalle interactivo</div>
-            <div class="report-title">🍴 Explorador de restaurantes</div>
-            <div class="report-desc">Filtra y explora métricas individuales de cada restaurante</div>
-          </div>
-          <a href="Reporte1_4_explorador_restaurantes.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 1.4 · Detalle interactivo</span>
+          <a href="Reporte1_4_explorador_restaurantes.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe src="Reporte1_4_explorador_restaurantes.html" loading="lazy"></iframe>
+          <iframe src="Reporte1_4_explorador_restaurantes.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
     </div>
@@ -462,44 +431,32 @@
     <!-- SECCIÓN 2A: Productos y precios -->
     <div id="tab-productos" class="tab-panel">
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 2A.1 · Gama alta</div>
-            <div class="report-title">👑 Podio de productos premium</div>
-            <div class="report-desc">Los platillos con mayor valor y posicionamiento en el catálogo</div>
-          </div>
-          <a href="Reporte2A_1_podio_premium.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 2A.1 · Gama alta</span>
+          <a href="Reporte2A_1_podio_premium.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe data-src="Reporte2A_1_podio_premium.html"></iframe>
+          <iframe data-src="Reporte2A_1_podio_premium.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
 
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 2A.2 · Distribución de tarifas</div>
-            <div class="report-title">🌡️ Mapa de calor de precios</div>
-            <div class="report-desc">Concentración e intensidad de precios por categoría y región</div>
-          </div>
-          <a href="Reporte2A_2_mapa_calor_precios.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 2A.2 · Distribución de tarifas</span>
+          <a href="Reporte2A_2_mapa_calor_precios.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe data-src="Reporte2A_2_mapa_calor_precios.html"></iframe>
+          <iframe data-src="Reporte2A_2_mapa_calor_precios.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
 
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 2A.3 · Catálogo completo</div>
-            <div class="report-title">🍔 Explorador de platillos</div>
-            <div class="report-desc">Búsqueda y análisis detallado de los productos del menú</div>
-          </div>
-          <a href="Reporte2A_3_explorador_platillos.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 2A.3 · Catálogo completo</span>
+          <a href="Reporte2A_3_explorador_platillos.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe data-src="Reporte2A_3_explorador_platillos.html"></iframe>
+          <iframe data-src="Reporte2A_3_explorador_platillos.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
     </div>
@@ -507,30 +464,22 @@
     <!-- SECCIÓN 2B: Condiciones del servicio -->
     <div id="tab-servicio" class="tab-panel">
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 2B.1 · Canales de venta</div>
-            <div class="report-title">🛵 Aumentos de precio por modalidad</div>
-            <div class="report-desc">Impacto en el precio final según el tipo de atención y entrega</div>
-          </div>
-          <a href="Reporte2B_1_aumentos_por_modalidad.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 2B.1 · Canales de venta</span>
+          <a href="Reporte2B_1_aumentos_por_modalidad.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe data-src="Reporte2B_1_aumentos_por_modalidad.html"></iframe>
+          <iframe data-src="Reporte2B_1_aumentos_por_modalidad.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
 
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 2B.2 · Evaluación logística</div>
-            <div class="report-title">🚦 Riesgo operativo del delivery</div>
-            <div class="report-desc">Indicadores de riesgo asociados a la operación de reparto</div>
-          </div>
-          <a href="Reporte2B_2_riesgo_delivery.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 2B.2 · Evaluación logística</span>
+          <a href="Reporte2B_2_riesgo_delivery.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe data-src="Reporte2B_2_riesgo_delivery.html"></iframe>
+          <iframe data-src="Reporte2B_2_riesgo_delivery.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
     </div>
@@ -538,79 +487,72 @@
     <!-- SECCIÓN 3: Trazabilidad de precios -->
     <div id="tab-trazabilidad" class="tab-panel">
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 3.1 · Evolución por rubro</div>
-            <div class="report-title">📊 Tendencia por categoría</div>
-            <div class="report-desc">Comportamiento histórico de precios agrupado por categoría gastronómica</div>
-          </div>
-          <a href="Reporte3_1_tendencia_categorias.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 3.1 · Evolución por rubro</span>
+          <a href="Reporte3_1_tendencia_categorias.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe data-src="Reporte3_1_tendencia_categorias.html"></iframe>
+          <iframe data-src="Reporte3_1_tendencia_categorias.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
 
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 3.2 · Estacionalidad corta</div>
-            <div class="report-title">📅 Ritmo semanal</div>
-            <div class="report-desc">Variación de tarifas y actividad comercial según el día de la semana</div>
-          </div>
-          <a href="Reporte3_2_ritmo_semanal.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 3.2 · Estacionalidad corta</span>
+          <a href="Reporte3_2_ritmo_semanal.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe data-src="Reporte3_2_ritmo_semanal.html"></iframe>
+          <iframe data-src="Reporte3_2_ritmo_semanal.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
 
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 3.3 · Divisas</div>
-            <div class="report-title">💱 Comparativo por monedas</div>
-            <div class="report-desc">Contraste de fluctuaciones según la divisa de operación</div>
-          </div>
-          <a href="Reporte3_3_comparativo_monedas.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 3.3 · Divisas</span>
+          <a href="Reporte3_3_comparativo_monedas.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe data-src="Reporte3_3_comparativo_monedas.html"></iframe>
+          <iframe data-src="Reporte3_3_comparativo_monedas.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
 
       <div class="report-card">
-        <div class="report-header">
-          <div>
-            <div class="report-tag">Reporte 3.4 · Consolidado territorial</div>
-            <div class="report-title">🌎 Acumulado por regiones</div>
-            <div class="report-desc">Crecimiento acumulado de precios por zona geográfica</div>
-          </div>
-          <a href="Reporte3_4_acumulado_regiones.html" target="_blank" class="btn-fullscreen">↗ Abrir pantalla completa</a>
+        <div class="report-topbar">
+          <span class="report-tag">Reporte 3.4 · Consolidado territorial</span>
+          <a href="Reporte3_4_acumulado_regiones.html" target="_blank" class="btn-fullscreen">↗ Pantalla completa</a>
         </div>
         <div class="iframe-wrapper">
-          <iframe data-src="Reporte3_4_acumulado_regiones.html"></iframe>
+          <iframe data-src="Reporte3_4_acumulado_regiones.html" scrolling="no" onload="resizeIframe(this)"></iframe>
         </div>
       </div>
     </div>
   </main>
 
   <script>
+    function resizeIframe(iframe) {
+      try {
+        if (iframe.contentWindow && iframe.contentWindow.document.body) {
+          const height = iframe.contentWindow.document.body.scrollHeight;
+          if (height > 200) {
+            iframe.style.height = (height + 24) + 'px';
+          }
+        }
+      } catch (e) {
+        iframe.style.height = '660px';
+      }
+    }
+
     function openTab(evt, tabId) {
-      // Ocultar todos los paneles
       const panels = document.querySelectorAll('.tab-panel');
       panels.forEach(panel => panel.classList.remove('active'));
 
-      // Desactivar todos los botones de pestaña
       const buttons = document.querySelectorAll('.tab-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
 
-      // Mostrar el panel seleccionado y activar su botón
       const activePanel = document.getElementById(tabId);
       activePanel.classList.add('active');
       evt.currentTarget.classList.add('active');
 
-      // Cargar los gráficos bajo demanda (lazy load) para que la página sea ultra rápida
       const iframes = activePanel.querySelectorAll('iframe[data-src]');
       iframes.forEach(iframe => {
         if (!iframe.getAttribute('src')) {
